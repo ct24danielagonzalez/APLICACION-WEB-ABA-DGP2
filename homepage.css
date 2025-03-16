@@ -1,0 +1,144 @@
+:root {
+    --navy: #2E4A62;
+    --teal: #68A5A4;
+    --sky-blue: #AAC2E4;
+    --beige: #F5F2EE;
+    --text-dark: #333333;
+    --text-light: #FFFFFF;
+      color: #0d6efd;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: 'League Spartan', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.navbar-custom {
+    background-color: white;
+    padding: 15px 40px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.8rem;
+    margin-left: 10px;
+}
+
+.navbar-nav {
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #333 !important;
+    font-weight: 700;
+    font-family: 'League Spartan', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--teal) !important;
+}
+
+.profile-icon {
+    color: #333;
+    width: 40px;
+    height: 40px;
+    transition: color 0.3s ease;
+}
+
+.profile-icon:hover {
+    color: var(--teal);
+}
+
+.emotions-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.emotions-title {
+    color: var(--navy);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.emotions-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.emotion-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: transform 0.2s;
+}
+
+.emotion-btn:hover {
+    transform: translateY(-3px);
+}
+
+.emotion-btn.feliz {
+    background-color: #FFE5D9;
+    color: #FF8C61;
+}
+
+.emotion-btn.triste {
+    background-color: #E2F0FF;
+    color: #4A90E2;
+}
+
+.emotion-btn.enojado {
+    background-color: #FFE9E9;
+    color: #FF6B6B;
+}
+
+.emotion-btn.emocionado {
+    background-color: #E8FFF3;
+    color: #2ECC71;
+}
+
+.recommendation-text {
+    font-size: 1.2rem;
+    color: #2E4A62;
+    margin-top: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.recommendation-text.visible {
+    opacity: 1;
+}
+
+.explore-link {
+    color: var(--navy);
+    font-weight: 500;
+}

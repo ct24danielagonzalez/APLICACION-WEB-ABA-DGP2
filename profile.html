@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Maquetacion-ABA/Profile.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <span class="logo-text">ABA</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homepage.html">Hogar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="activities.html">Recomendaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="us.html">Nosotros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="emotions-section">
+    <h2 class="emotions-title">Para empezar, ¿cómo te sientes hoy?</h2>
+    <div class="emotions-container">
+        <button class="emotion-btn feliz" onclick="selectEmotion('feliz')">Feliz</button>
+        <button class="emotion-btn triste" onclick="selectEmotion('triste')">Triste</button>
+        <button class="emotion-btn enojado" onclick="selectEmotion('enojado')">Enojado</button>
+        <button class="emotion-btn emocionado" onclick="selectEmotion('emocionado')">Emocionado</button>
+    </div>
+    <div id="recommendation-message" class="recommendation-text"></div>
+</div>
+ 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<button onclick="cambiarMes(-1)">Anterior</button>
+<button onclick="cambiarMes(1)">Siguiente</button>
+<h2 id="titulo"></h2>
+<table id="calendar"></table>
+
+<div id="overlay"></div>
+<div id="modal">
+    <h3>Agregar Sentimiento</h3>
+    <input type="text" id="sentimientoInput" placeholder="Descripción del sentimiento">
+    <button onclick="agregarSentimiento()">Agregar</button>
+    <button onclick="cerrarModal()">Cerrar</button>
+</div>
+
+<script>
+    let fechaActual = new Date();
+    
+    function mostrarCalendario() {
+        const year = fechaActual.getFullYear();
+        const month = fechaActual.getMonth();
+        const now = new Date(year, month, 1);
+        const last = new Date(year, month + 1, 0);
+        const primerDiaSemana = (now.getDay() === 0) ? 7 : now.getDay();
+        const ultimoDiaMes = last.getDate();
+        
+        let dia = 0;
+        let resultado = "<tr bgcolor='silver'><th>Día</th></tr><tr>";
+        
+        for (let i = 1; i <= 42; i++) {
+            if (i === primerDiaSemana) {
+                dia = 1;
+            }
+            if (i < primerDiaSemana || dia > ultimoDiaMes) {
+                resultado += "<td></td>";
+            } else {
+                const className = (new Date().getDate() === dia && new Date().getMonth() === month && new Date().getFullYear() === year) ? 'today' : '';
+                resultado += `<td class="${className}" onclick="seleccionarFecha(${dia})">${dia}</td>`;
+                dia++;
+            }
+            if (i % 7 === 0) resultado += "</tr><tr>";
+        }
+        
+        resultado += "</tr>";
+        document.getElementById("calendar").innerHTML = resultado;
+        document.getElementById("titulo").innerText = `${now.toLocaleString('default', { month: 'long' })} ${year}`;
+        
+        // Mostrar sentimientos almacenados
+        mostrarSentimientos();
+    }
+
+    function cambiarMes(direccion) {
+        fechaActual.setMonth(fechaActual.getMonth() + direccion);
+        mostrarCalendario();
+    }
+
+    function seleccionarFecha(dia) {
+        const fechaSeleccionada = `${fechaActual.getFullYear()}-${fechaActual.getMonth() + 1}-${dia}`;
+        
+        // Mostrar modal para agregar sentimiento
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("modal").style.display = "block";
+        
+        // Guardar la fecha seleccionada
+        window.fechaSentimiento = fechaSeleccionada; 
+    }
+
+    function selectEmotion(emotion) {
+        const descripcionSentimiento = `Me siento ${emotion}`;
+        
+        // Agregar sentimiento directamente sin abrir el modal
+        agregarSentimientoDesdeEmocion(descripcionSentimiento);
+    }
+
+    function agregarSentimientoDesdeEmocion(descripcionSentimiento) {
+        // Obtener sentimientos existentes del LocalStorage
+        const sentimientos = JSON.parse(localStorage.getItem("sentimientos")) || {};
+        
+        // Agregar el nuevo sentimiento
+        if (!sentimientos[window.fechaSentimiento]) {
+            sentimientos[window.fechaSentimiento] = [];
+        }
+        
+        sentimientos[window.fechaSentimiento].push(descripcionSentimiento);
+        
+        // Guardar los sentimientos actualizados en LocalStorage
+        localStorage.setItem("sentimientos", JSON.stringify(sentimientos));
+        
+        alert(`Sentimiento agregado para el ${window.fechaSentimiento}: ${descripcionSentimiento}`);
+        
+        // Mostrar calendario actualizado
+        mostrarCalendario();
+    }
+
+    function cerrarModal() {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("sentimientoInput").value = "";
+    }
+
+    function mostrarSentimientos() {
+        const sentimientos = JSON.parse(localStorage.getItem("sentimientos")) || {};
+        
+        // Resaltar celdas con sentimientos
+        const celdas = document.querySelectorAll("#calendar td");
+        
+        celdas.forEach(celda => {
+            const diaTexto = celda.innerText;
+            const fechaCompleta = `${fechaActual.getFullYear()}-${fechaActual.getMonth() + 1}-${diaTexto}`;
+            
+            if (sentimientos[fechaCompleta]) {
+                celda.title = sentimientos[fechaCompleta].join(", "); // Mostrar sentimientos como tooltip
+                celda.style.backgroundColor = "#e0ffe0"; // Cambiar color de fondo si hay sentimientos
+            }
+        });
+    }
+    function agregarSentimiento() {
+            const sentimientoInput = document.getElementById("sentimientoInput");
+            const descripcionSentimiento = sentimientoInput.value.trim(); // Eliminar espacios en blanco al principio y al final
+        
+            if (descripcionSentimiento !== "") {
+                agregarSentimientoDesdeEmocion(descripcionSentimiento);
+                cerrarModal(); // Cerrar el modal después de agregar el sentimiento
+            } else {
+                alert("Por favor, introduce una descripción del sentimiento.");
+            }
+    }
+
+    mostrarCalendario(); // Inicializar el calendario
+</script>
+
+</body>
+</html>

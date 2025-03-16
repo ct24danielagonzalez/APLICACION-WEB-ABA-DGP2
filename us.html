@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+.navbar {
+    background-color: #f8f9fa; /* Color de fondo para la página de Recomendaciones */
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-right: 2rem;
+}
+
+.nav-links a {
+    color: #2E4A62; /* Color del texto */
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #fff; /* Color al hacer hover */
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #2E4A62; /* Color de las líneas del menú hamburguesa */
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #AAC2E4; /* Color de fondo para el menú móvil */
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+}
+   
+        .hero-section {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .hero-title {
+            flex: 1;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: left;
+            color:#2E4A62 ;
+        }
+        
+        .about-text {
+            flex: 2;
+            font-size: 1.0rem;
+            line-height: 1.5;
+            text-align: left;
+            text-align: justify;
+            color: #2E4A62;
+        }
+        
+        .team-quote {
+            background-color: #AAC2E4;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+            text-align: center;
+            color: #2E4A62;
+        }
+        
+        .card {
+            height: 100%;
+            transition: transform 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-img-top {
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            color: #0d6efd;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-title, .about-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" style="background-color: white;"> <!-- Cambio de color de fondo -->
+        <button class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="./homepage.html">Hogar</a></li>
+            <li><a href="./us.html">Nosotros</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">SOBRE NOSOTRAS</h1>
+                <p class="about-text">
+                    Somos un equipo de jóvenes panameñas que hemos creado una respuesta a una crisis que conocemos de primera mano: la falta de acceso a apoyo en salud mental. Nuestra visión combina nuestros conocimientos en tecnología con un profundo compromiso social para revolucionar cómo los jóvenes reciben atención emocional. Nuestro robot terapéutico no es solo un proyecto - es nuestra contribución para transformar la salud mental. Con ABA, buscamos ayudar a construir un futuro en el que el bienestar emocional sea accesible y personalizado.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="team-quote">
+            <h2 class="display-6">"TEAMWORK MAKES THE DREAM WORK"</h2>
+            <h4 class="text-muted mt-3">CONOCE A NUESTRO EQUIPO</h4>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+            <div class="col">
+                <div class="card">
+                    <img src="./yo.jpg" class="card-img-top" alt="Paola González">
+                    <div class="card-body">
+                        <h5 class="card-title">Paola A. González</h5>
+                        <p class="card-text">"Me involucré con este proyecto para poder aportar con mi trabajo y conocimiento en la misión de hacer que, poco a poco, la salud mental sea un tema evaluado por la seriedad requerida. Brindar un espacio en el que las personas puedan llegar a encontrar cierto alivio me lleva a esforzarme por esta causa".</div></p>
+                    </div>
+                </div
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="./daniela.jpg" class="card-img-top" alt="Daniela Cornejo">
+                    <div class="card-body">
+                        <h5 class="card-title">Daniela N. Cornejo</h5>
+                        <p class="card-text">"Mi compromiso es asegurar que ABA no sea solo tecnología, sino una herramienta que verdaderamente entienda y apoye a quienes luchan con desafíos de salud mental".</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="./urss.jpg" class="card-img-top" alt="Gladys Wing">
+                    <div class="card-body">
+                        <h5 class="card-title">Gladys M. Wing</h5>
+                        <p class="card-text">"Me animé a ser parte de este proyecto porque me gusta la idea de ayudar a las personas a mejorar su bienestar emocional y brindarles un espacio seguro donde puedan expresarse sin miedo al juicio. Creo que la salud mental es fundamental para una vida equilibrada, y saber que puedo aportar a este propósito me motiva aún más".</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="./paula.jpg" class="card-img-top" alt="Paula Mendoza">
+                    <div class="card-body">
+                        <h5 class="card-title">Paula K. Mendoza</h5>
+                        <p class="card-text">"Tengo como aspiración hacer de ABA un gran proyecto e ir creciendo poco a poco, agregando mejoras y nuevas actualizaciones, más que todo ver que genere un impacto significativo en cada una de las personas que le está dando una oportunidad no sólo a este proyecto, sino a ella misma".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

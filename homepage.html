@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABA - Conectando Emociones</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+<style> 
+:root {
+    --navy: #2E4A62;
+    --teal: #68A5A4;
+    --sky-blue: #AAC2E4;
+    --beige: #F5F2EE;
+    --text-dark: #333333;
+    --text-light: #FFFFFF;
+      color: #0d6efd;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: 'League Spartan', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.navbar-custom {
+    background-color: white;
+    padding: 15px 40px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.8rem;
+    margin-left: 10px;
+}
+
+.navbar-nav {
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #333 !important;
+    font-weight: 700;
+    font-family: 'League Spartan', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--teal) !important;
+}
+
+.profile-icon {
+    color: #333;
+    width: 40px;
+    height: 40px;
+    transition: color 0.3s ease;
+}
+
+.profile-icon:hover {
+    color: var(--teal);
+}
+
+.emotions-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.emotions-title {
+    color: var(--navy);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.emotions-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.emotion-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: transform 0.2s;
+}
+
+.emotion-btn:hover {
+    transform: translateY(-3px);
+}
+
+.emotion-btn.feliz {
+    background-color: #FFE5D9;
+    color: #FF8C61;
+}
+
+.emotion-btn.triste {
+    background-color: #E2F0FF;
+    color: #4A90E2;
+}
+
+.emotion-btn.enojado {
+    background-color: #FFE9E9;
+    color: #FF6B6B;
+}
+
+.emotion-btn.emocionado {
+    background-color: #E8FFF3;
+    color: #2ECC71;
+}
+
+.recommendation-text {
+    font-size: 1.2rem;
+    color: #2E4A62;
+    margin-top: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.recommendation-text.visible {
+    opacity: 1;
+}
+
+.explore-link {
+    color: var(--navy);
+    font-weight: 500;
+}
+
+:root {
+    --primary-color: #4fa3d1;
+    --button-hover: #3a8bbb;
+    --chat-bg: #ffffff;
+    --border-color: #ccc;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --user-message-bg: #4fa3d1;
+    --bot-message-bg: #f5f0e1;
+    --text-light: #ffffff;
+    --text-dark: #333;
+}
+
+#chat-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    height: 450px;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    background-color: var(--chat-bg);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.8);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#chat-container.show {
+    display: flex;
+    transform: scale(1);
+    opacity: 1;
+}
+
+#chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    max-width: 75%;
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+    display: inline-block;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Mensaje del usuario */
+.user-message {
+    background-color: var(--user-message-bg);
+    color: var(--text-light);
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+/* Mensaje del bot */
+.bot-message {
+    background-color: var(--bot-message-bg);
+    color: var(--text-dark);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+/* Animación de entrada para los mensajes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#chat-form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--chat-bg);
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    outline: none;
+}
+
+/* Botón flotante */
+#chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#chat-button:hover {
+    background-color: var(--button-hover);
+    transform: scale(1.1);
+}
+
+/* Botón de cerrar */
+#close-chat {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+
+</style>
+</head>
+<body>
+  
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <span class="logo-text">ABA</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="homepage.html">Hogar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="activities.html">Recomendaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="us.html">Nosotros</a>
+                </li>
+            </ul>
+            <div class="profile-container">
+                <a href="profile.html">
+                    <svg class="profile-icon" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img src="./bolita.png" alt="ABA" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h1>ABA</h1>
+
+            <p class="justified-text">
+                ABA es tu compañero en el camino hacia el bienestar emocional. Diseñado para personas entre 15 y 25 años, 
+                ofrecemos un espacio seguro donde puedes expresar tus emociones y recibir apoyo personalizado. 
+                Nuestro objetivo es acompañarte en cada paso, combinando tecnología y empatía para ayudarte a 
+                mantener una salud mental positiva.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="emotions-section">
+    <h2 class="emotions-title"> Para empezar, ¿cómo te sientes hoy?</h2>
+    <div class="emotions-container">
+        <button class="emotion-btn feliz" onclick="selectEmotion('feliz')">Feliz</button>
+        <button class="emotion-btn triste" onclick="selectEmotion('triste')">Triste</button>
+        <button class="emotion-btn enojado" onclick="selectEmotion('enojado')">Enojado</button>
+        <button class="emotion-btn emocionado" onclick="selectEmotion('emocionado')">Emocionado</button>
+    </div>
+    <div id="recommendation-message" class="recommendation-text"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function selectEmotion(emotion) {
+        const messageElement = document.getElementById('recommendation-message');
+        let activityName = '';
+        
+        switch(emotion) {
+            case 'feliz':
+                activityName = 'VÍNCULOS VALIOSOS';
+                break;
+            case 'triste':
+                activityName = 'CALMA INTERIOR';
+                break;
+            case 'enojado':
+                activityName = 'EXPRESIÓN CREATIVA';
+                break;
+            case 'emocionado':
+                activityName = 'MOVIMIENTO VITAL';
+                break;
+        }
+        
+        messageElement.innerHTML = `
+            Te recomendamos intentar <strong>${activityName}</strong>.<br>
+            <a href="activities.html" class="explore-link">Explora esta y más actividades en nuestra sección de recomendaciones →</a>
+        `;
+        
+        messageElement.classList.remove('visible');
+        void messageElement.offsetWidth; 
+        messageElement.classList.add('visible');
+
+        // Agregar evento al calendario
+    agregarEventoAlCalendario(emotion);
+}
+
+function agregarEventoAlCalendario(emotion) {
+    const descripcionEvento = `Me siento ${emotion}`;
+    
+    // Obtener la fecha actual como string
+    const fechaActualString = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+
+    // Obtener eventos existentes del LocalStorage
+    const eventos = JSON.parse(localStorage.getItem("sentimientos")) || {};
+    
+    // Agregar el nuevo evento
+    if (!eventos[fechaActualString]) {
+        eventos[fechaActualString] = [];
+    }
+    
+    eventos[fechaActualString].push(descripcionEvento);
+
+    // Guardar los eventos actualizados en LocalStorage
+    localStorage.setItem("sentimientos", JSON.stringify(eventos));
+    
+    alert(`Sentimiento agregado para ${fechaActualString}: ${descripcionEvento}`);
+    
+    }
+</script>
+
+<!-- Botón flotante -->
+<button id="chat-button">💬</button>
+
+<!-- Contenedor del chat -->
+<div id="chat-container">
+    <button id="close-chat">✖</button>
+    <div id="chat-messages"></div>
+    <form id="chat-form">
+        <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#chat-button').click(function() {
+        $('#chat-container').addClass('show');
+        $(this).fadeOut();
+    });
+
+    $('#close-chat').click(function() {
+        $('#chat-container').removeClass('show');
+        setTimeout(() => $('#chat-button').fadeIn(), 300);
+    });
+
+    $('#chat-form').on('submit', function(e) {
+        e.preventDefault();
+        const message = $('#chat-input').val();
+        if (message.trim() === '') return;
+
+        $('#chat-messages').append(`<div class="message user-message">${message}</div>`);
+        $('#chat-input').val('');
+
+        $.ajax({
+            url: 'http://localhost:5000/chat',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ message: message }),
+            success: function(response) {
+                $('#chat-messages').append(`<div class="message bot-message">${response.content}</div>`);
+                $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+            }
+        });
+    });
+});
+
+</script>
+
+</body>
+</html>

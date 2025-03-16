@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/activities.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #AAC2E4; /* Color de fondo para la página de Recomendaciones */
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-right: 2rem;
+}
+
+.nav-links a {
+    color: #2E4A62; /* Color del texto */
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #fff; /* Color al hacer hover */
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #2E4A62; /* Color de las líneas del menú hamburguesa */
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #AAC2E4; /* Color de fondo para el menú móvil */
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+}
+
+        
+
+    body {
+    background-color: #AAC2E4;
+    font-family: 'League Spartan', sans-serif;
+    min-height: 90vh;
+}
+
+.page-header {
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    color: #333;
+    background-color: #FFF;
+    width: 100%; 
+}
+
+.header-content {
+    width: 100%; 
+    text-align: left; 
+}
+
+.header-title {
+    font-size: 3.0rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    width: 100%; 
+}
+
+.header-subtitle {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    color: #68A5A4;
+    width: 100%; 
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+
+.card {
+    height: 100%;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background-color: white;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #68A5A4;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.6;
+    text-align: justify;
+    margin: 0;
+    display: block; 
+    height: 4.8em;
+    overflow: hidden;
+}
+
+
+@media (max-width: 992px) {
+    .header-title {
+        font-size: 2.5rem; 
+    }
+    
+    .header-subtitle {
+        font-size: 1.5rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        text-align: center; 
+    }
+}
+</style>
+</head>
+<body> 
+    <nav class="navbar">
+    <button class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="./homepage.html">Hogar</a></li>
+        <li><a href="./us.html">Nosotros</a></li>
+    </ul>
+</nav>
+
+    <header class="page-header">
+        <div class="header-content">
+            <h1 class="header-title">Pequeños pasos, grandes cambios</h1>
+            <h3 class="header-subtitle">Transforma tu bienestar a través de actividades significativas</h3>
+    
+        </div>
+    </header>
+
+
+    <div class="container">
+        <!-- Primera fila -->
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./ejercicio.jpg" class="card-img-top" alt="Ejercicio físico">
+                    <div class="card-body">
+                        <h5 class="card-title">Movimiento Vital</h5>
+                        <p class="card-text">Realiza ejercicios suaves durante quince minutos al día para activar tu cuerpo y mente.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./meditacion.jpg" class="card-img-top" alt="Meditación">
+                    <div class="card-body">
+                        <h5 class="card-title">Calma Interior</h5>
+                        <p class="card-text">Practica respiración consciente por diez minutos para encontrar paz y reducir el estrés.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./escritura.jpg" class="card-img-top" alt="Escritura">
+                    <div class="card-body">
+                        <h5 class="card-title">Expresión Creativa</h5>
+                        <p class="card-text">Escribe en tu diario personal tus pensamientos y emociones para liberar tu mente hoy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./social.jpg" class="card-img-top" alt="Conexión social">
+                    <div class="card-body">
+                        <h5 class="card-title">Vínculos Valiosos</h5>
+                        <p class="card-text">Conecta con amigos y familia mediante llamadas o mensajes para fortalecer lazos hoy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Segunda fila -->
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./creatividad.jpg" class="card-img-top" alt="Creatividad">
+                    <div class="card-body">
+                        <h5 class="card-title">Arte y Creación</h5>
+                        <p class="card-text">Dedica tiempo a dibujar o pintar libremente para expresar tu creatividad sin límites.</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./naturaleza.jpg" class="card-img-top" alt="Naturaleza">
+                    <div class="card-body">
+                        <h5 class="card-title">Conexión Natural</h5>
+                        <p class="card-text">Camina en un parque cercano para reconectarte con la naturaleza y renovar tu energía.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./selfcare.jpg" class="card-img-top" alt="Autocuidado">
+                    <div class="card-body">
+                        <h5 class="card-title">Ritual Personal</h5>
+                        <p class="card-text">Toma un baño relajante con aromas suaves para nutrir tu cuerpo y calmar tu espíritu.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card">
+                    <img src="./musica.jpg" class="card-img-top" alt="Música">
+                    <div class="card-body">
+                        <h5 class="card-title">Armonía Musical</h5>
+                        <p class="card-text">Escucha música que te inspire y eleve tu ánimo durante al menos veinte minutos hoy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
