@@ -19,7 +19,7 @@
             align-items: center;
             height: 100vh;
             background-color: white;
-            background-image: url(./portada3.jpg);
+            background-image: url("{{ url_for('static', filename='img/portada3.jpg') }}");
             background-size: cover;
             background-position: center;
             filter: brightness(70%) saturate(120%);
@@ -82,54 +82,25 @@
 <body>
     <div class="container">
         <header>Registrarse</header>
-        <form id="register-form" onsubmit="registerUser(event); return false;">
-            <input type="text" id="register-name" placeholder="Nombre completo" required>
-            <input type="email" id="register-email" placeholder="Dirección de correo electrónico" required>
-            <input type="password" id="register-password" placeholder="Contraseña" required>
+
+        <!-- Mostrar mensajes flash -->
+        {% if get_flashed_messages() %}
+            <div class="alert">
+                {% for message in get_flashed_messages() %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form id="register-form" action="{{ url_for('signup') }}" method="POST">
+            <input type="text" id="register-name" name="register-name" placeholder="Nombre completo" required>
+            <input type="email" id="register-email" name="register-email" placeholder="Dirección de correo electrónico" required>
+            <input type="password" id="register-password" name="register-password" placeholder="Contraseña" required>
             <button type="submit" class="btn" id="register-btn">Crear cuenta</button>
         </form>
         <div class="switch">
-            <p>¿Ya tienes una cuenta? <a href="login.html">Iniciar sesión</a></p>
+            <p>¿Ya tienes una cuenta? <a href="{{ url_for('login') }}">Iniciar sesión</a></p>
         </div>
     </div>
-    
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js';
-    
-        const firebaseConfig = {
-            apiKey: "AIzaSyDHHi3h2G5VY4bCg92QWZOjM6Bl6pco2ro",
-            authDomain: "aba2025-8df97.firebaseapp.com",
-            projectId: "aba2025-8df97",
-            storageBucket: "aba2025-8df97.appspot.com",
-            messagingSenderId: "819645801939",
-            appId: "1:819645801939:web:2c4f13c8029003c434bb26"
-        };
-    
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-    
-        window.registerUser = async function(event) {
-            event.preventDefault();
-            
-            try {
-                const email = document.getElementById('register-email').value;
-                const password = document.getElementById('register-password').value;
-                const name = document.getElementById('register-name').value;
-    
-                if (!email || !password || !name) {
-                    alert("Por favor, completa todos los campos.");
-                    return;
-                }
-    
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                await sendEmailVerification(userCredential.user);
-                alert("Registro exitoso. Por favor verifica tu correo electrónico.");
-                window.location.href = 'homepage.html';
-            } catch (error) {
-                alert(`Error: ${error.message}`);
-            }
-        };
-    </script>
 </body>
 </html>

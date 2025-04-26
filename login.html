@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup/Login Form</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet">
 
 <style>
 
@@ -22,7 +22,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: white;
-    background-image: url(./portada3.jpg);
+    background-image: url("{{ url_for('static', filename='img/portada3.jpg') }}");
     background-size: cover;
     background-position: center;
     filter: brightness(70%) saturate(120%);
@@ -95,56 +95,29 @@ form .btn:hover {
 <body>
     <div class="container">
         <header>¡Bienvenido de nuevo!</header>
+
+        <!-- Mostrar mensajes flash -->
+        {% if get_flashed_messages() %}
+            <div class="alert">
+                {% for message in get_flashed_messages() %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
         <section class="formulario-iniciosesion">
-            <form id="formulario-sesion" onsubmit="loginUser(event); return false;">
+            <form id="formulario-sesion" action="{{ url_for('login') }}" method="POST">
                 <label for="email">Correo electrónico:</label>
-                <input type="email" id="login-email" name="email" class="form-control mb-2" required><br><br>
+                <input type="email" id="login-email" name="login-email" class="form-control mb-2" required><br><br>
                 
                 <label for="password">Contraseña:</label>
-                <input type="password" id="login-password" name="password" class="form-control mb-2" required><br><br>
+                <input type="password" id="login-password" name="login-password" class="form-control mb-2" required><br><br>
                 
                 <button type="submit" class="btn">Iniciar sesión</button>
             </form>
             <div class="switch">
-                <p>¿No tienes una cuenta? <a href="signup.html">Regístrate aquí</a></p>
+                <p>¿No tienes una cuenta? <a href="{{ url_for('signup') }}">Regístrate aquí</a></p>
             </div>
         </section>
     </div>
-
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js';
-        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js';
-    
-        const firebaseConfig = {
-            apiKey: "AIzaSyDHHi3h2G5VY4bCg92QWZOjM6Bl6pco2ro",
-            authDomain: "aba2025-8df97.firebaseapp.com",
-            projectId: "aba2025-8df97",
-            storageBucket: "aba2025-8df97.appspot.com",
-            messagingSenderId: "819645801939",
-            appId: "1:819645801939:web:2c4f13c8029003c434bb26"
-        };
-    
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-    
-        window.loginUser = async function(event) {
-            event.preventDefault();
-            
-            try {
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-    
-                console.log("Intentando login con:", email); // Debug
-    
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                console.log('Login exitoso:', userCredential.user); // Debug
-                
-                window.location.href = 'homepage.html';
-            } catch (error) {
-                console.error('Error:', error); // Debug
-                alert(`Error de inicio de sesión: ${error.message}`);
-            }
-        };
-    </script> 
 </body>
 </html>
